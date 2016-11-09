@@ -9,7 +9,7 @@ int main()
 	string line;
 	string program;
 	
-	ifstream myfile ("test.txt");
+	ifstream myfile ("file");
 	while (getline(myfile,line)) 
 	{
 		program += line;
