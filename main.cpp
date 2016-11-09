@@ -8,7 +8,6 @@ int main()
 {
 	string line;
 	string program;
-	
 	ifstream myfile ("file");
 	while (getline(myfile,line)) 
 	{
