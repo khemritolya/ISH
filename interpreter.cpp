@@ -4,12 +4,14 @@
 
 using namespace std;
 
-int main() {
+int main() 
+{
 	string line;
 	string program;
 	
 	ifstream myfile ("test.txt");
-	while (getline(myfile,line)) {
+	while (getline(myfile,line)) 
+	{
 		program += line;
 	}
 	
