@@ -5,5 +5,6 @@
 using namespace std;
 
 int main() {
-	ofsteam myfile ("test.txt")
+	ofsteam myfile ("test.txt");
+	
 }
