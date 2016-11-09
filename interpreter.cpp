@@ -5,6 +5,14 @@
 using namespace std;
 
 int main() {
-	ofsteam myfile ("test.txt");
+	string line;
+	string program;
 	
+	ifstream myfile ("test.txt");
+	while (getline(myfile,line)) {
+		program += line;
+	}
+	
+	cout << program << endl;
+	myfile.close();
 }
