@@ -5,5 +5,5 @@
 using namespace std;
 
 int main() {
-	cout << "Hello World" << endl; 
+	ofsteam myfile ("test.txt")
 }
