@@ -1,9 +1,9 @@
-#include <iosteam>
+#include <iostream>
 #include <string>
 #include <fstream>
 
 using namespace std;
 
-int() {
+int main() {
 	cout << "Hello World" << endl; 
 }
