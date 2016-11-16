@@ -7,47 +7,53 @@ using namespace std;
 
 const vector<string>& split(string filename)
 {
-	/*
-	takes filename to open
-	returns a vector of commands, ignoring white space and grouping based on {}
-	*/
 	ifstream myfile(filename);
 	vector<string>* commands = new vector<string>();
 	string current_command = "";
-	int brace_balance;
-	typedef std::istream_iterator<char> CharIter;
+	int brace_balance = 0;
+	typedef std::istreambuf_iterator<char> CharIter;
 
 	for (CharIter it(myfile); it != CharIter(); ++it)
 	{
+		cout << current_command << endl;
 		switch (*it)
 		{
-		case ' ': case '\t': case '\n': break;
+		case '\t': case '\n': case ' ':
+			// silly whitespace
+			break;
 		case '{':
-			brace_balance = 1;
-			++it;
-			while (brace_balance > 0 && it != CharIter())
+			++brace_balance;
+			if (brace_balance != 1) // if it's not the opening {
 			{
-				if (*it == '{') ++brace_balance;
-				if (*it == '}') --brace_balance;
-				if (brace_balance > 0)
-				{
-					current_command = current_command + *it;
-					++it;
-				}
+				current_command += *it;
 			}
+			break;
+		case '}':
+			--brace_balance;
+			if (brace_balance != 0) // if it's not the closing }
+			{
+				current_command += *it;
+			}
+			break;
 		case ';':
-			commands->push_back(current_command);
-			current_command = "";
+			if (brace_balance == 0)
+			{
+				commands->push_back(current_command);
+				current_command = "";
+			}
+			else
+			{
+				current_command += ';';
+			}
 			break;
 		default:
-			current_command = current_command + *it;
+			current_command += *it;
 			break;
 		}
 	}
 	myfile.close();
 	return *commands;
 }
-
 int main()
 {
 	vector<string> commands = split("file");
