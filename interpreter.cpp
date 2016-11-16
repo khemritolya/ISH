@@ -5,6 +5,8 @@
 #include <iterator>
 using namespace std;
 
+struct 
+
 const vector<string>& split(string filename)
 {
 	ifstream myfile(filename);
