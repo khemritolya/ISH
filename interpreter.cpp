@@ -5,12 +5,10 @@
 #include <iterator>
 using namespace std;
 
-struct 
-
-const vector<string>& split(string filename)
+vector<const string>& split(string filename)
 {
 	ifstream myfile(filename);
-	vector<string>* commands = new vector<string>();
+	vector<const string>* commands = new vector<string>();
 	string current_command = "";
 	int brace_balance = 0;
 	typedef std::istreambuf_iterator<char> CharIter;
@@ -58,7 +56,7 @@ const vector<string>& split(string filename)
 }
 int main()
 {
-	vector<string> commands = split("file");
+	vector<const string> commands = split("file");
 	cout << "Commands read as follows: (in order of execution)\n";
 	for (vector<string>::const_iterator i = commands.begin(); i != commands.end(); ++i) cout << "  - " << *i << endl;
 }
