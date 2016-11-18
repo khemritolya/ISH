@@ -5,17 +5,16 @@
 #include <iterator>
 using namespace std;
 
-vector<const string>& split(string filename)
+vector<string> split(string filename)
 {
 	ifstream myfile(filename);
-	vector<const string>* commands = new vector<string>();
+	vector<string>* commands = new vector<string>();
 	string current_command = "";
 	int brace_balance = 0;
 	typedef std::istreambuf_iterator<char> CharIter;
 
 	for (CharIter it(myfile); it != CharIter(); ++it)
 	{
-		cout << current_command << endl;
 		switch (*it)
 		{
 		case '\t': case '\n': case ' ':
@@ -56,7 +55,7 @@ vector<const string>& split(string filename)
 }
 int main()
 {
-	vector<const string> commands = split("file");
+	vector<string> commands = split("file");
 	cout << "Commands read as follows: (in order of execution)\n";
 	for (vector<string>::const_iterator i = commands.begin(); i != commands.end(); ++i) cout << "  - " << *i << endl;
 }
