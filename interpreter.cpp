@@ -3,7 +3,72 @@
 #include <fstream>
 #include <vector>
 #include <iterator>
+#include <unordered_map>
 using namespace std;
+
+struct ISHInt
+{
+public:
+	string str_format;
+	int int_format;
+	ISHInt() {};
+	ISHInt(string input)
+	{
+		int v = 0;
+		for (string::iterator it = input.begin(); it != input.end(); ++it)
+		{
+			v = v*12 + toDec[*it];
+		}
+		str_format = input;
+		int_format = v;
+	}
+	ISHInt(int input)
+	{
+		string v = "";
+		int x = input;
+		while (x != 0)
+		{
+			v = toDoz[x % 12] + v;
+			x = (int)(x - x % 12) / 12;
+		}
+		str_format = input == 0 ? "0" : v;
+		int_format = input;
+	}
+	void operator=(ISHInt other)
+	{
+		this->int_format = other.int_format;
+		this->str_format = other.str_format;
+	}
+private:
+	unordered_map<char, int> toDec = {
+		{ '0', 0 },
+		{ '1', 1 },
+		{ '2', 2 },
+		{ '3', 3 },
+		{ '4', 4 },
+		{ '5', 5 },
+		{ '6', 6 },
+		{ '7', 7 },
+		{ '8', 8 },
+		{ '9', 9 },
+		{ 'a', 10 },
+		{ 'b', 11 }
+	};
+	unordered_map<int, string> toDoz = {
+		{ 0, "0" },
+		{ 1, "1" },
+		{ 2, "2" },
+		{ 3, "3" },
+		{ 4, "4" },
+		{ 5, "5" },
+		{ 6, "6" },
+		{ 7, "7" },
+		{ 8, "8" },
+		{ 9, "9" },
+		{ 10, "a" },
+		{ 11, "b" }
+	};
+};
 
 vector<string> split(string filename)
 {
